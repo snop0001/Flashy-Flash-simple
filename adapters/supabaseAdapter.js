@@ -9,8 +9,16 @@ const supabase = createClient(
 console.log(process.env.URL_SUPABASE);
 export async function getMyprogress(){
     console.log('In my supabase adapter 😊');
-    const {data,error} = await supabase.from('progress').select('*');
+    const {data,error} = await supabase.from('Progress').select('*');
     if(error) {
         console.error('supabase error',error);
     }else return data;
     }
+
+
+export async function setPlayer(name,birthday,subject){
+  const player = {'name':name,'birthday':birthday,'subject':subject};
+const{data,error} = await supabase.from('Player').insert(player)
+if(error) console.error('query error', error);
+else return data
+}
